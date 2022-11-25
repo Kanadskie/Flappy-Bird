@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Teko:700" rel="stylesheet">
+        <link rel="icon" href="./favicon.png" type=" image/png">
+        <title>Flappy Bird by Kanadskie</title>
+        
+        <style>
+
+            @font-face {
+                font-family: 'Flappy Bird';
+                src: url('./fonts/FlappyBird.ttf') format("truetype");
+            }
+
+            .body {
+                background-color: rgb(115, 197, 205);
+            }
+
+            .wrapper {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .logo-img {
+                display: block;
+                margin: 20px auto;
+                width: 220px;
+                user-select: none;
+            }
+
+            #game {
+                display: block;
+                margin: 0 auto;
+                border: 2px solid black;
+                border-radius: 15px;
+            }
+
+        </style>
+
+    </head>
+
+    <body class="body">
+
+        <div сlass="wrapper">
+
+            <div class="logo"><img class="logo-img" src="./assets/logo.png" alt="logo"></div>
+
+            <canvas id="game"></canvas>
+
+        </div>
+
+        <script src="src/config.js"></script>
+
+        <script src="src/entities/base.js"></script>
+        <script src="src/entities/bg.js"></script>
+        <script src="src/entities/bird.js"></script>
+        <script src="src/entities/road.js"></script>
+        <script src="src/entities/pipes.js"></script>
+        <script src="src/entities/score.js"></script>
+        <script src="src/entities/end.js"></script>
+        <script src="src/entities/start.js"></script>
+
+        <script src="src/drawEngine.js"></script>
+        <script src="src/soundEngine.js"></script>
+        <script src="src/physicsEngines.js"></script>
+        <script src="src/inputHandlers.js"></script>
+        <script src="src/resources.js"></script>
+
+        <script src="src/game.js"></script>
+        <script src="index.js"></script>
+
+    </body>
+    
+</html>
