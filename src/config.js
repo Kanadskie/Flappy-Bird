@@ -7,7 +7,7 @@ class Config {
 
     canvas = {
         id: 'game',
-        width: 448,
+        width: 340,
         height: 480,
     }
 
@@ -153,14 +153,14 @@ class Config {
             }
         ],
 
-        finalScoreX: 293,
+        finalScoreX: 240,
         finalScoreY: 185,
 
-        recordX: 293,
+        recordX: 240,
         recordY: 227,
 
         medals: {
-            x: 137,
+            x: 82,
             y: 177,
             width: 45,
             height: 44,
@@ -200,7 +200,7 @@ class Config {
     }
 
     startBtn = {
-        x: 180,
+        x: 132,
         y: 263,
         width: 83,
         height: 29
