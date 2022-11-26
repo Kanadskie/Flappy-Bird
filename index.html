@@ -11,7 +11,7 @@
         <style>
 
             @font-face {
-                font-family: 'Flappy Bird';
+                font-family: 'Flappy Bird', Helvetica, Arial, sans-serif;
                 src: url('./fonts/FlappyBird.ttf') format("truetype");
             }
 
@@ -20,6 +20,11 @@
             }
 
             .wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
                 margin-left: 20px;
                 margin-right: 20px;
             }
@@ -27,7 +32,6 @@
             .logo-img {
                 display: block;
                 margin: 20px auto;
-                width: 220px;
                 user-select: none;
             }
 
@@ -46,7 +50,7 @@
 
         <div сlass="wrapper">
 
-            <div class="logo"><img class="logo-img" src="./assets/logo.png" alt="logo"></div>
+            <img class="logo-img" src="./assets/logo.png" alt="logo">
 
             <canvas id="game"></canvas>
 
