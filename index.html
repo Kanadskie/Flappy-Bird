@@ -10,6 +10,13 @@
         
         <style>
 
+            /*
+            * Prefixed by https://autoprefixer.github.io
+            * PostCSS: v8.4.14,
+            * Autoprefixer: v10.4.7
+            * Browsers: last 4 version
+            */
+
             @font-face {
                 font-family: 'Flappy Bird', Helvetica, Arial, sans-serif;
                 src: url('./fonts/FlappyBird.ttf') format("truetype");
@@ -17,13 +24,26 @@
 
             .body {
                 background-color: rgb(115, 197, 205);
+                -webkit-user-select: none;
+                   -moz-user-select: none;
+                    -ms-user-select: none;
+                        user-select: none;
             }
 
             .wrapper {
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                        flex-direction: column;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
 
                 margin-left: 20px;
                 margin-right: 20px;
@@ -32,7 +52,6 @@
             .logo-img {
                 display: block;
                 margin: 20px auto;
-                user-select: none;
             }
 
             #game {
