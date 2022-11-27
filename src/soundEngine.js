@@ -1,7 +1,9 @@
 class SoundEngine extends Audio {
 
     play() {
-		audio.play()
-    }
 
+		  audio.play()
+
+    }
+    
 }

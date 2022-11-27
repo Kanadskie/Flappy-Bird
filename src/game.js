@@ -1,5 +1,7 @@
 class Game {
+
     constructor() {
+
         this._config = new Config()
 
         this._canvasListener = null
@@ -21,30 +23,42 @@ class Game {
         this._resourceLoader = new ResourceLoader()
 
         this._inputHandlerMouse = new MouseInputHandler({
+
             left: () => {
+
                 this._bird.flap()
+
             }
+
         })
+
     }
 
     async prepare() {
+
         this._spriteSheet = this._resourceLoader.load({
+
             type: RESOURCE_TYPE.IMAGE,
             src: this._config.spritesheet.src,
             width: this._config.spritesheet.width,
             height: this._config.spritesheet.height,
+
         })
+
     }
 
     reset() {
 
         this._scoreCurrent = new Score({
+
             value: this._config.value,
             drawEngine: this._drawEngine,
             canvas: this
+
         })
         
         this._background = new Background({
+
             x: this._config.background.x,
             y: this._config.background.y,
             width: this._config.background.width,
@@ -54,9 +68,11 @@ class Game {
             spriteSheet: this._spriteSheet,
             drawEngine: this._drawEngine,
             canvas: this
+
         })
 
         this._bird = new Bird({
+
             x: this._config.bird.x,
             y: this._config.bird.y,
             width: this._config.bird.width,
@@ -69,9 +85,11 @@ class Game {
             drawEngine: this._drawEngine,
             period: this._config.period,
             canvas: this
+
         })
         
         this._road = new Road({
+
             x: this._config.road.x,
             y: this._config.road.y,
             width: this._config.road.width,
@@ -81,9 +99,11 @@ class Game {
             gameSpeed: this._config.gameSpeed,
             drawEngine: this._drawEngine,
             canvas: this
+
         })
 
         this._pipes = new Pipes({
+
             width: this._config.pipes.width,
             height: this._config.pipes.height,
             top: this._config.pipes.top,
@@ -96,9 +116,11 @@ class Game {
             framesCounter: this._config.framesCounter,
             drawEngine: this._drawEngine,
             canvas: this,
+
         })
 
         this._startMsg = new Start({
+
             x: this._config.startMsg.x,
             y: this._config.startMsg.y,
             width: this._config.startMsg.width,
@@ -107,9 +129,11 @@ class Game {
             spriteSheet: this._spriteSheet,
             drawEngine: this._drawEngine,
             canvas: this,
+
         })
 
         this._gameOverMsg = new GameOver({
+
             x: this._config.gameOverMsg.x,
             y: this._config.gameOverMsg.y,
             width: this._config.gameOverMsg.width,
@@ -131,53 +155,73 @@ class Game {
             medalGold: this._config.gameOverMsg.medals.medalsType.medalGold,
             medalPlatinum: this._config.gameOverMsg.medals.medalsType.medalPlatinum,
             canvas: this,
+
         })
+
     }
 
     update() {
+
         this._road.update()
         this._bird.update()
         this._pipes.update()
+
     }
 
     draw() {
+
         this._background.draw()
         this._pipes.draw()
         this._road.draw()
         this._bird.draw()
         this._scoreCurrent.draw()
+
     }
 
     _loop() {
+
         ++this._pipes.framesCounter
-       ++this._bird.framesCounter
+        ++this._bird.framesCounter
+
         const now = Date.now()
         const delta =  now - this._lastUpdate
 
         this.update(delta / 1000)
         
-        if(this._playing) {
+        if (this._playing) {
+
             this._drawEngine.clear()
+    
             this.draw()
             
             this._lastUpdate = now
 
             requestAnimationFrame(this._loop.bind(this))
+
         }
+
     }
 
     start() {
+
         this._canvas.removeEventListener('click', this._canvasListener)
-        this._playing = true
+
         this._inputHandlerMouse.subscribe()
+
+        this._playing = true
+
         this._lastUpdate = Date.now()
         
         this._loop()
 
         document.addEventListener('keydown', (e) => {
+
             if (e.key === "ArrowUp") {
+
                 this._bird.flap()
+
             }
+
         })
 
     }
@@ -192,10 +236,13 @@ class Game {
         this._startMsg.draw()
         
         this._canvasListener = () => {
+
             this.start()
+
         }
 
         this._canvas.addEventListener('click', this._canvasListener)
+
     }
 
     gameOver() {
@@ -203,7 +250,9 @@ class Game {
         this._inputHandlerMouse.unsubscribe()
 
         if (this._scoreCurrent._value > Number(localStorage.getItem('best'))) {
+
             localStorage.setItem('best', this._scoreCurrent._value)
+
         }
 
         this._drawEngine.clear()
@@ -215,16 +264,22 @@ class Game {
         this._gameOverMsg.draw()
 
         this._canvas.addEventListener("click", (evt) => {
-            let rect = this._canvas.getBoundingClientRect();
-            let clickX = evt.clientX - rect.left;
-            let clickY = evt.clientY - rect.top;
+
+            let rect = this._canvas.getBoundingClientRect()
+
+            let clickX = evt.clientX - rect.left
+            let clickY = evt.clientY - rect.top
 
             if (clickX >= this._config.startBtn.x && clickX <= this._config.startBtn.x + this._config.startBtn.width && clickY >= this._config.startBtn.y && clickY <= this._config.startBtn.y + this._config.startBtn.height) {
+                
                 location.reload()
+            
             }
+
         })
 
         this._playing = false
+        
     }
 
 }

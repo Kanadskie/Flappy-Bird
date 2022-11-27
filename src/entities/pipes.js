@@ -1,6 +1,9 @@
 class Pipes extends Entity {
+
     constructor(params) {
+
         super(params)
+
         this.position = params.position
         this.canvas = params.canvas
         this.top = params.top
@@ -8,20 +11,23 @@ class Pipes extends Entity {
         this.dx = params.dx
         this.maxYPos = params.maxYPos
         this.gap = params.gap
+
     }
 
     draw() {
         
         for(let i = 0; i < this.position.length; i++) {
 
-            let p = this.position[i];       
+            let p = this.position[i]       
             
-            let topYPos = p.y;
+            let topYPos = p.y
 
-            let bottomYPos = p.y + this.height + this.gap;
+            let bottomYPos = p.y + this.height + this.gap
 
             this._spriteSheet.then(sprites => {
+
                 this._drawEngine.drawPipes({
+
                     spriteSheet: sprites,
                     sx: this.top.sX,
                     sy: this.top.sY,
@@ -31,9 +37,11 @@ class Pipes extends Entity {
                     dy: topYPos,
                     dWidth: this.width,
                     dHeight: this.height
+
                 })
 
                 this._drawEngine.drawPipes({
+
                     spriteSheet: sprites,
                     sx: this.bottom.sX,
                     sy: this.bottom.sY,
@@ -43,22 +51,31 @@ class Pipes extends Entity {
                     dy: bottomYPos,
                     dWidth: this.width,
                     dHeight: this.height   
+
                 })
+
             })
+
         }
+
     }
 
     update() {
 
-        if(this.framesCounter % 100 == 0) {
+        if (this.framesCounter % 100 == 0) {
+
             this.position.push({
+
                 x : this.canvas.width,
                 y : this.maxYPos * (Math.random() + 1)
-            });
+
+            })
+
         }
 
-        for(let i = 0; i < this.position.length; i++) {
-            let p = this.position[i];
+        for (let i = 0; i < this.position.length; i++) {
+
+            let p = this.position[i]
 
             const pipeX1 = p.x
             const pipeX2 = p.x + this.width
@@ -83,33 +100,48 @@ class Pipes extends Entity {
             const conditionForTopPipe_L = ((topLBirdX >= pipeX1) && (topLBirdX < pipeX2)) && (topRBirdY <= topPipeY)
 
             const conditionGameOver =
+
                 conditionForBottomPipe_R 
+
                 || conditionForBottomPipe_L
+
                 || conditionForTopPipe_R 
+
                 || conditionForTopPipe_L
 
-            if(conditionGameOver) {
+            if (conditionGameOver) {
+
                 this._canvas._soundHit.play()
 
                 setTimeout(() => {
+
                     this._canvas._soundDie.play()
+
                 }, 800)
 
                 this._canvas.gameOver()
+
             }
 
             p.x -= this.gameSpeed
         
-            if (p.x + this.width <= 0){
-                this.position.shift();
+            if (p.x + this.width <= 0) {
+
+                this.position.shift()
+
             }
 
             if (p.x === this._canvas._bird.x) {
+
                 ++this._canvas._scoreCurrent._value
+
                 this._canvas._soundPoint.play()
+
             }
 
         }
+
     }
+
 }
 

@@ -1,5 +1,7 @@
 class Entity {
+
     constructor({x, y, width, height, frames, framesCounter, gameSpeed, spriteSheet, drawEngine, canvas}) {
+        
         this.x = x
         this.y = y
         this.width = width
@@ -20,16 +22,22 @@ class Entity {
     draw() {
 
 		this._spriteSheet.then(sprites => {
+
             this._drawEngine.drawImage({
+                
 				spriteSheet: sprites,
 				image: this._frames[this._frameIdx],
 				x: this.x,
 				y: this.y,
 				width: this.width,
 				height: this.height
+
 			})
+
         })
+
     }
 
     update() {}
+
 }

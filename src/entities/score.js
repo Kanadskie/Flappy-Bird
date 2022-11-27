@@ -1,7 +1,10 @@
 class Score extends Entity {
     constructor(params) {
+
         super(params)
+
         this._value = params.value
+
     }
 
     draw() {
@@ -9,4 +12,5 @@ class Score extends Entity {
         this._drawEngine.drawScore(this._value)
 
     }
+    
 }
